@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 Use App\Http\Controllers\TinController;
 /*
@@ -23,3 +24,5 @@ Route::get('/tin-tuc/{id}', [TinController::class, 'detail']);
 // Route::get('/tin-tuc', function () {
 //     return view('tin');
 // });
+
+Route::get('/list-products', [ProductController::class, 'index']);
