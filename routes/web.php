@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 Use App\Http\Controllers\TinController;
@@ -26,3 +27,4 @@ Route::get('/tin-tuc/{id}', [TinController::class, 'detail']);
 // });
 
 Route::get('/list-products', [ProductController::class, 'index']);
+Route::resource('/brand', BrandController::class);
