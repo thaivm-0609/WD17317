@@ -43,13 +43,13 @@ class BrandController extends Controller
         $description = $request->input('description'); //lay description tu request form gui len
 
         $logo = $request->file('logo')->getClientOriginalName(); //lay ten file
-        $request->file('logo')->store('public/images'); //luu file vao duong dan
+        $request->file('logo')->storeAs('public/images', $logo); //luu file vao duong dan public/images voi ten $logo
 
         //tao data de luu vao db
         $data = [
             'name' => $name,
             'description' => $description,
-            'logo' => $logo, 
+            'logo' => $logo,
         ];
 
         Brand::create($data); //tao ban ghi co du lieu la $data

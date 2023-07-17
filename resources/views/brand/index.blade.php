@@ -39,7 +39,7 @@
                         <td>{{ $brand->name }}</td>
                         <td>{{ $brand->description }}</td>
                         <td>
-                            <img src="{{ asset($brand->logo) }}" style="height: 50px;width:100px;">
+                            <img src="{{asset('/storage/images/'.$brand->logo)}}" style="height: 50px;width:100px;">
                         </td>
                         <td>
                             <form action="{{ route('brand.destroy',$brand->id) }}" method="Post">
