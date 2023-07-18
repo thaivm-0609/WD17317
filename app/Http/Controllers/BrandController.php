@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Http\Requests\StoreBrandRequest;
+use App\Http\Requests\UpdateBrandRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -75,9 +77,9 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Brand $brand)
     {
-        //
+        return view('brand.edit', compact('brand'));
     }
 
     /**
@@ -87,9 +89,22 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        //
+        $logo = $request->file('logo')->getClientOriginalName();
+        if ($logo !== $brand->logo) {
+            $request->file('logo')->storeAs('public/images', $logo);
+            Storage::delete('public/images/'.$brand->logo);
+        }
+
+        $brand->fill([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'logo' => $logo,
+        ])->save();
+
+        return redirect()->route('brand.index')
+            ->with('success','Brand has been update successfully.');
     }
 
     /**
@@ -98,8 +113,13 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Brand $brand)
     {
-        //
+        $logo = $brand->logo;
+        Storage::delete('public/images/'.$logo);
+        $brand->delete();
+
+        return redirect()->route('brand.index')
+            ->with('success','Brand has been deleted successfully');
     }
 }
