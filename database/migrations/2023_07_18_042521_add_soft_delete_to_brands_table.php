@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLogColumnToBrandTable extends Migration
+class AddSoftDeleteToBrandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddLogColumnToBrandTable extends Migration
     public function up()
     {
         Schema::table('brands', function (Blueprint $table) {
-            $table->string('logo')->after('name');
+            $table->softDeletes(); //them xoa mem
         });
     }
 
@@ -26,7 +26,7 @@ class AddLogColumnToBrandTable extends Migration
     public function down()
     {
         Schema::table('brands', function (Blueprint $table) {
-            $table->dropColumn('logo');
+            //
         });
     }
 }
