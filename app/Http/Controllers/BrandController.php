@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Http\Requests\StoreBrandRequest;
-use App\Http\Requests\UpdateBrandRequest;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -16,7 +15,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::get(); //lay du lieu tu bang brand
+        $brands = Brand::all(); //lay du lieu tu bang brand
 
         return view('brand.index', ['brands'=>$brands]);
     }
@@ -76,9 +75,9 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Brand $brand)
+    public function edit($id)
     {
-        return view('brand.edit', compact('brand'));
+        //
     }
 
     /**
@@ -88,26 +87,9 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBrandRequest $request, Brand $brand)
+    public function update(Request $request, $id)
     {
-        $name = $request->input('name'); // lay input name moi
-        $description = $request->input('description'); //lay input description moi
-        $brand->fill([
-            'name' => $name,
-            'description' => $description,
-        ])->save();
-
-        if ($request->file('logo') !== null) {
-            $logo = $request->file('logo')->getClientOriginalName(); //lay ten file
-            $request->file('logo')->storeAs('public/images', $logo); //luu file vao duong dan public/images voi ten $logo
-        
-            $brand->fill([
-                'logo' => $logo,
-            ])->save();
-        }
-
-        return redirect()->route('brand.index')
-            ->with('success', 'Brand update successfully');
+        //
     }
 
     /**
@@ -116,11 +98,8 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Brand $brand)
+    public function destroy($id)
     {
-        $brand->delete();
-
-        return redirect()->route('brand.index')
-            ->with('success', 'Delete brand successfully');
+        //
     }
 }
