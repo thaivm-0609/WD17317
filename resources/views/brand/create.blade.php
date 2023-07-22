@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+    @extends('layouts.layout')
 
-<head>
-    <meta charset="UTF-8">
-    <title>Add New Brand</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-
-<body>
+    @section('content')
     <div class="container mt-2">
         <div class="row">
             <div class="col-lg-12 margin-tb">
@@ -55,5 +48,4 @@
             </div>
         </form>
     </div>
-</body>
-</html>
+    @endsection
