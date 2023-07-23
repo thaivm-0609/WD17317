@@ -22,6 +22,7 @@ class Product extends Model
     public function brand() //tạo relationship với model Brand
     {
         return $this->belongsTo(Brand::class);
+        // return $this->belongsTo(Brand::class, 'id_hang');
     }
 
     public function category() //tạo relationship với model Category
