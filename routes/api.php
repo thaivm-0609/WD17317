@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductControllerApi;
 use App\Http\Controllers\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,3 +20,5 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::resource('/users', UserResource::class);
+Route::resource('/products', ProductControllerApi::class);
+

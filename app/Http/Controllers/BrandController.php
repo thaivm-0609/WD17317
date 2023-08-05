@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -100,10 +101,13 @@ class BrandController extends Controller
         if ($request->file('logo') !== null) {
             $logo = $request->file('logo')->getClientOriginalName(); //lay ten file
             $request->file('logo')->storeAs('public/images', $logo); //luu file vao duong dan public/images voi ten $logo
-        
+            $oldLogo = $brand->logo;
+            Storage::delete('public/images/'.$oldLogo);
+
             $brand->fill([
                 'logo' => $logo,
-            ])->save();
+            ])->save(); 
+
         }
 
         return redirect()->route('brand.index')
